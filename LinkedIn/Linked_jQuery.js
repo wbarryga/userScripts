@@ -1,4 +1,19 @@
 // ==UserScript==
+// @name         LinkedIn tools alpha
+// @namespace    http://tampermonkey.net/
+// @version      0.5
+// @description  GUI buttons that add additional functionalities
+// @author       You
+// @match        https://www.linkedin.com/recruiter/profile/*
+// @require      https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js
+// @require      https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js
+// @grant        none
+// ==/UserScript==
+/* jshint -W097 */
+
+//Establish framework for UI
+
+// ==UserScript==
 // @name         LinkedIn tools Beta
 // @namespace    http://tampermonkey.net/
 // @version      0.5
@@ -98,4 +113,7 @@ $(document).ajaxStop(function() {
 	//create an iframe for google maps
 	var presentEmployer = document.querySelector("#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a").textContent;
 	$('#profile-experience > div.module-body > ul > li:nth-child(1) > div').append("<iframe width='600' height='450'frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?key=AIzaSyDa1MdnxPwUXg8HVIa4Fywci0uOaV0hwRY&q=" + presentEmployer + "'</iframe>");
+	//skip the current company page on linkedin when clicking the link. Go straight to Google
+	$('#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a').attr("href", "https://www.google.com/#q=" + presentEmployer);
 });
+

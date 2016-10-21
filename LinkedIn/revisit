@@ -23,6 +23,8 @@ function avature() {
 	var url1 = "https://ciscorecruiting.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"hasWord\",\"value\":" + "\"" + first + " " + last +"\"}],\"isAnd\":true}}";
 	window.open(url1);
 }
+//Deactivating but keeping as reference for potential future use
+/* 
 function logger () {
 	var name = document.querySelectorAll(".profile-info > h1.searchable")[0].textContent;
 	var title = document.querySelector(".title.searchable").textContent;
@@ -38,16 +40,18 @@ function logger () {
 	var urlBuild = "https://docs.google.com/a/livinglakeshore.com/forms/d/11bSB8fG1wDLnXdDbIZmRyamoMe-0BYZ96kNWk-jvryc/viewform?" + "entry.1418490741=" + name + "&" +"entry.1632901593=" + location + "&" + "entry.1205790955=" + title + "&" + "entry.147595872=" + pubProfBase + uniBase ;
 	window.open(urlBuild);
 }
-
+*/
+//Deactivating, but retaining code for reference
+/*
 function employer () {
 	var comp = document.querySelector("#profile-experience .position:nth-of-type(1) h5 a").textContent;
 	var urlbase = "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=";
 	var urlBuild = urlbase + comp;
 	window.open(urlBuild);
 }
+*/
 //This waits for all the AJAX to stop. It works well with the LinkedIn domain. It also appears to prevent it from running more than once
-$(document).ready(function() {
-	$(document).ajaxStop(function() {
+    setTimeout(function() {
 		$('head').append("<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css' rel='stylesheet' type='text/css'>");
 		//Adds button to each skills and uses pulltext function for event handler
 		var skillsParent = $(".skills > li");
@@ -65,23 +69,25 @@ $(document).ready(function() {
 		}
 		//remove the text "recruiter tools" to make room for the buttons
 		$('#recruiter-toolbox > div.module-header > h2').text("");
-		//function to add buttons
+		//function to add buttons. Update to remove deactivated buttons
 		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='1button'>Partner</button>");
 		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='2button'>Avature</button>");
-		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='3button'>Log</button>");
-		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='4button'>Employer</button>");
+		//$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='3button'>Log</button>");
+		//$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='4button'>Employer</button>");
 		$('.mybutt').button();
 		$('.mybutt').css({
-			'font-size' : '10px',
-			'width': '70px',
+			'font-size' : '12px',
+			'width': '125px',
 			'height' : '20px'
 		});
-		$('#2button,#3button,#4button').css("float","left");
+		$('#1button').css("float", "left");
+		$('#2button').css("float", "right");
+		//$('#2button,#3button,#4button').css("float","left");
 		//Attach functions to the recruiter tools buttons
 		$('#1button').on("click", partner);
 		$('#2button').on("click", avature);
-		$('#3button').on("click", logger);
-		$('#4button').on("click", employer);
+		//$('#3button').on("click", logger);
+		//$('#4button').on("click", employer);
 		//turn skill buttons to jQuery
 		$('.skillbutton').button();
 		$('.skillbutton').css("height", "15px");
@@ -96,13 +102,8 @@ $(document).ready(function() {
 		var stackquery = "http://stackoverflow.com/jobs/companies?searchTerm=";
 		$(".company-logo:first").parent().attr("href", stackquery + compLogoName);
 		$(".website > a").css({
-			"font-size" : "20px",
-            
+			"font-size" : "20px",       
 		});
         */
-	});
-});
+},2500);
 
-setTimeout(function() {
-	$("website > a").effect("bounce");
-},2000);

@@ -17,7 +17,7 @@
 2. Left click the browser extension  
 ![Logo](https://lh3.googleusercontent.com/2Nck70VF3N4WrJV4VZbgj2SNO7wWucNB1McQbS-ukSewe214Nt1AmH6pQPZ8KZgGWx6GvJbz5Q=s128-h128-e365)
 2. Follow Link to the most recent source code  
-[Master](estasney/userScripts/Master)
+[Master](userScripts/LinkedIn/revisit)
 3. Copy and paste the code as a new script
   
 ### Known Issues

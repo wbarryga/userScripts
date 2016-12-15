@@ -17,7 +17,7 @@
 2. Left click the browser extension  
 ![Logo](https://lh3.googleusercontent.com/2Nck70VF3N4WrJV4VZbgj2SNO7wWucNB1McQbS-ukSewe214Nt1AmH6pQPZ8KZgGWx6GvJbz5Q=s128-h128-e365)
 2. Follow Link to the most recent source code  
-[Master](userScripts/LinkedIn/Cisco Tools v0.0.1)
+[Master](https://github.com/estasney/userScripts/blob/master/LinkedIn/Cisco%20Tools%20v0.0.1)
 3. Copy and paste the code as a new script
   
 ### Known Issues

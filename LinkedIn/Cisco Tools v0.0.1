@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LinkedIn tools Beta
 // @namespace    http://tampermonkey.net/
-// @version      0.5
+// @version      0.5.1
 // @description  GUI buttons that add additional functionalities
 // @author       You
 // @match        https://www.linkedin.com/recruiter/profile/*
@@ -23,35 +23,8 @@ function avature() {
 	var url1 = "https://ciscorecruiting.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"hasWord\",\"value\":" + "\"" + first + " " + last +"\"}],\"isAnd\":true}}";
 	window.open(url1);
 }
-//Deactivating but keeping as reference for potential future use
-/* 
-function logger () {
-	var name = document.querySelectorAll(".profile-info > h1.searchable")[0].textContent;
-	var title = document.querySelector(".title.searchable").textContent;
-	var location = document.querySelector(".location.searchable > a").textContent;
-	var pubProfBase = "https://www.linkedin.com";
-	var uniBase = document.querySelector(".public-profile > a").getAttribute("href");
-	var pubProf = pubProfBase + uniBase;
-	var currentP = window.location.href;
-	var date = new Date();
-	var day = date.getDate();
-	var month = date.getMonth() + 1;
-	var sent = month + "/" + day;
-	var urlBuild = "https://docs.google.com/a/livinglakeshore.com/forms/d/11bSB8fG1wDLnXdDbIZmRyamoMe-0BYZ96kNWk-jvryc/viewform?" + "entry.1418490741=" + name + "&" +"entry.1632901593=" + location + "&" + "entry.1205790955=" + title + "&" + "entry.147595872=" + pubProfBase + uniBase ;
-	window.open(urlBuild);
-}
-*/
-//Deactivating, but retaining code for reference
-/*
-function employer () {
-	var comp = document.querySelector("#profile-experience .position:nth-of-type(1) h5 a").textContent;
-	var urlbase = "https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=";
-	var urlBuild = urlbase + comp;
-	window.open(urlBuild);
-}
-*/
-//This waits for all the AJAX to stop. It works well with the LinkedIn domain. It also appears to prevent it from running more than once
-    setTimeout(function() {
+
+setTimeout(function() {
 		$('head').append("<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css' rel='stylesheet' type='text/css'>");
 		//Adds button to each skills and uses pulltext function for event handler
 		var skillsParent = $(".skills > li");
@@ -72,8 +45,6 @@ function employer () {
 		//function to add buttons. Update to remove deactivated buttons
 		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='1button'>Partner</button>");
 		$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='2button'>Avature</button>");
-		//$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='3button'>Log</button>");
-		//$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='4button'>Employer</button>");
 		$('.mybutt').button();
 		$('.mybutt').css({
 			'font-size' : '12px',
@@ -86,23 +57,9 @@ function employer () {
 		//Attach functions to the recruiter tools buttons
 		$('#1button').on("click", partner);
 		$('#2button').on("click", avature);
-		//$('#3button').on("click", logger);
-		//$('#4button').on("click", employer);
-		//turn skill buttons to jQuery
-		$('.skillbutton').button();
-		$('.skillbutton').css("height", "15px");
-var presentEmployer = document.querySelector("#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a").textContent;
-/* Deactivating google maps
-        $('#profile-experience > div.module-body > ul > li:nth-child(1) > div').append("<iframe width='600' height='450'frameborder='0' style='border:0' src='https://www.google.com/maps/embed/v1/search?key=AIzaSyDa1MdnxPwUXg8HVIa4Fywci0uOaV0hwRY&q=" + presentEmployer + "'</iframe>");'
-*/
-		//skip the current company page on linkedin when clicking the link. Go straight to Google
-		$('#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a').attr("href", "https://www.google.com/#q=" + presentEmployer);
-		//replace company logo with a stackoverflow query URL
-		var compLogoName = $(".company-logo:first").attr("alt");
-		var stackquery = "http://stackoverflow.com/jobs/companies?searchTerm=";
-		$(".company-logo:first").parent().attr("href", stackquery + compLogoName);
-		$(".website > a").css({
-			"font-size" : "20px",       
+		
+
+		  
 		});
 },4500);
 

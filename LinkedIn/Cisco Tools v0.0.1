@@ -12,7 +12,7 @@
 /* jshint -W097 */
 function partner() {
 	var companyName = document.querySelectorAll("#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a")[0].textContent;
-	var url = "https://locatr.cloudapps.cisco.com/WWChannels/LOCATR/openBasicSearch.do?keyWord=" + companyName;
+	var url = "https://locatr.cloudapps.cisco.com/WWChannels/LOCATR/performBasicSearch.do?keyWord=" + companyName + "&country=US";
 	window.open(url);
 }
 function avature() {

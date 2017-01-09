@@ -1,0 +1,45 @@
+// ==UserScript==
+// @name         LinkedIn Market Research
+// @namespace    https://github.com/estasney/userScripts/tree/master/LinkedIn
+// @version      0.1
+// @description  Quickly Parse LinkedIn Data for Research
+// @author       You
+// @match        https://www.linkedin.com/recruiter/smartsearch?*
+// @require      https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js
+// @require      https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js
+// @grant        none
+// ==/UserScript==
+
+    
+setTimeout(function() {
+    $('head').append("<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css' rel='stylesheet' type='text/css'>");
+    var searchUrlRawRef = $("#search-info > a").attr("href");
+    var searchUrlRaw = $("#search-info > a").attr("href");
+    var cacheIdRawRef = $("#search-info > a").attr("href");
+    var cacheIdRaw = $("#search-info > a").attr("href");
+    // function to find character position
+    function charFind (string, char) {
+        return string.indexOf(char);
+    }
+    var searchID = searchUrlRaw.slice((charFind(searchUrlRawRef, "=")+1), charFind(searchUrlRawRef,"&"));
+    var cacheID = cacheIdRaw.slice((charFind(cacheIdRawRef,"y=") + 2));
+    
+    //add Market Research button
+    $("#left-rail-top-bar").text("");
+    $("#left-rail-top-bar").append("<button class='mybutton'>Market Research</button>");
+    $('.mybutton').on("click", research);
+    
+    function research() {
+    var searchUrlRawRef = $("#search-info > a").attr("href");
+    var searchUrlRaw = $("#search-info > a").attr("href");
+    var cacheIdRawRef = $("#search-info > a").attr("href");
+    var cacheIdRaw = $("#search-info > a").attr("href");
+    // function to find character position
+    function charFind (string, char) {
+        return string.indexOf(char);
+    }
+    
+    var url = "https://www.linkedin.com/recruiter/api/smartsuggestions?searchHistoryId=" + searchID + "&searchCacheKey=" + cacheID + "&linkContext=Controller%3AsmartSearch%2CAction%3Asearch%2CID%3A1588544604&doExplain=false&reset=G_SWR&reset=CCNTL&reset=PATL&reset=ECTL&reset=CPTL&reset=TNTL&reset=RATL&reset=OOTL&reset=sortBy&facet.G_SWR=us%3A0";
+    window.open(url);
+}
+},4500);

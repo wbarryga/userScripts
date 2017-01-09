@@ -8,6 +8,12 @@
   1. If you're like me, keeping track of Cisco's partners is a time intensive task. While we have an Excel spreadsheet, the online partner search tool is the most current source of information. 
   2. Click the "Partner" button to open a new tab with the lead's current employer pre-loaded as a search term.
   
+### Market Research (Beta)
+  1. Quickly pull key metrics based on LinkedIn's Smart Suggestions
+  2. Scenario: Generate Heat Map of Google Employee's Locations
+  
+    
+  
 ## Installation
 ### Supported Browsers
 1. Google Chrome

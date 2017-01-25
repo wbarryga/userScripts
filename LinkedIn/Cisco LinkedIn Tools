@@ -24,53 +24,21 @@ function avature() {
     window.open(url1);
 }
 
-function harvest() {
-    var skillArray = [];
-    var title = clean("#profile-experience > div.module-body > ul > li:nth-child(1) > div > h4 > a");
-    $(".skill").each(function (i, e) {
-        skillArray.push($(this).text().toLowerCase());
-    });
-    window.open("https://docs.google.com/forms/d/e/1FAIpQLSdc8nzgBgZdGEeGzcjMukiRePDcpzKX0pJ9NmOhtQ3eTx14nw/viewform?entry.402819329=" + title + "&entry.183715080=" + skillArray);
-}
-
-function clean (css) {
-    return $(css).text().toLowerCase().replace(/ |-/g, "_");
-}
-
 setTimeout(function() {
     $('head').append("<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css' rel='stylesheet' type='text/css'>");
     //Adds button to each skills and uses pulltext function for event handler
-    var skillsParent = $(".skills > li");
-    skillsParent.prepend("<input type='button' class='skillbutton'></input>");
-    for (var i = 1; i < skillsParent.length; i++) {
-        $(".skills > li:nth-child(" + i + ")").on("click", pulltext(i));
-    }
-    //Callback function that adds a unique event handler for each button
-    function pulltext(i) {
-        return function() {
-            var text1 = ($(".skills > li:nth-child(" + i + ")").text());
-            var url = "https://www.linkedin.com/topic/";
-            window.open(url + text1);
-        };
-    }
-    
     //remove the text "recruiter tools" to make room for the buttons
     $('#recruiter-toolbox > div.module-header > h2').text("");
     //function to add buttons. Update to remove deactivated buttons
     $('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='1button'>Partner</button>");
     $('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='2button'>Avature</button>");
-    $('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='3button'>Harvest</button>");
     $('.mybutt').button();
     $('.mybutt').css({
         'font-size' : '12px',
         'width': '80px',
         'height' : '20px'
     });
-    $('#1button').css("float", "left");
-    $('#2button ,#3button').css("float","left");
-    //$('#2button,#3button,#4button').css("float","left");
-    //Attach functions to the recruiter tools buttons
+    $('#1button, #2button').css("float", "left");
     $('#1button').on("click", partner);
     $('#2button').on("click", avature);
-    $('#3button').on("click", harvest);
 },4500);

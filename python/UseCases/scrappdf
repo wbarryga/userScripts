@@ -1,0 +1,76 @@
+import csv
+import requests
+import time
+from lxml import html
+import string
+
+#Insert baseURL first
+baseURL = "XXX"
+#Define CSV
+path = r"XXX"
+csvFile = open(path, 'w+', encoding='utf-8', newline='')
+outputWriter = csv.writer(csvFile, dialect='excel')
+outputWriter.writerow(['Name', 'Location', 'Title', 'Company', 'Resume Link', 'Download Link'])
+#Include login details with the standard login page
+payload = {
+    '__email': 'XXX',
+    '__password': 'XXX'
+}
+
+loginURL = "https://secure.indeed.com/account/login?service=rex&hl=en_US&co=US&cfb=2&continue=https%3A%2F%2Fwww.indeed.com%2Fresumes%3Fq%3Dengineer%26l%3DMA"
+
+#Load the requested page
+
+print("Commencing program...")
+print("Opening secured page...")
+with requests.Session() as s:
+    p = s.post(loginURL, data=payload)
+    # print the html returned or something more intelligent to see if it's a successful login page.
+
+
+    # An authorised request.
+    r = s.get(baseURL)
+    rPar = html.fromstring(r.content)
+    print("Page opened")
+    leadName = rPar.xpath("//*[@id='results']/li//a/text()")
+    leadLocation = rPar.xpath("//*[@id='results']/li//span[@class='location']/text()")
+    leadTitle = rPar.xpath("//*[@id='results']/li//div[@class='experience'][1]/text()")
+    leadCompany = rPar.xpath("//*[@id='results']/li//div[@class='experience'][1]/span/text()")
+    leadResume = rPar.xpath("//*[@id='results']/li[@data-tn-component='resume-search-result']//a/@href")
+    # Gets number of elements of each set. Below code prints a blank result if it's not found. Prevents error
+    lnLen = len(leadName)
+    llLen = len(leadLocation)
+    ltLen = len(leadTitle)
+    lcLen = len(leadCompany)
+    lrLen = len(leadResume)
+
+    print("Parse complete")
+    n = 0
+    while n < len(leadName):
+        if n < lnLen:
+            name = leadName[n]
+        else:
+            name = 'Blank'
+        if n < llLen:
+            location = leadLocation[n]
+        else:
+            location = 'Blank'
+        if n < ltLen:
+            title = leadTitle[n]
+        else:
+            title = 'Blank'
+        if n < lcLen:
+            company = leadCompany[n]
+        else:
+            company = 'Blank'
+        if n < lrLen:
+            resume = "https://www.indeed.com" + leadResume[n]
+        else:
+            resume = "Blank"
+        if n < lrLen:
+            dlLinktoClean = "https://www.indeed.com" + leadResume[n]
+            dlLink = dlLinktoClean.replace("?sp=0", "/pdf")
+        else:
+            dlLink = 'Blank'
+        outputWriter.writerow([name, location, title, company, resume, dlLink])
+        n += 1

@@ -20,7 +20,7 @@ function avature() {
     var nameArr = name.split(" ");
     var first = nameArr[0];
     var last = nameArr[1];
-    var url1 = "https://ciscorecruiting.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"==\",\"value\":" + "\"" + first + " " + last +"\"}],\"isAnd\":true}}";
+    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"==\",\"value\":" + "\"" + first + " " + last +"\"}],\"isAnd\":true}}";
     window.open(url1);
 }
 

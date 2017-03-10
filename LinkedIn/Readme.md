@@ -3,10 +3,12 @@
 ## Functionalities
 ### Avature Search
   1. Want to avoid adding duplicates to Avature? Click the "Avature" button that opens a new tab with the lead's name pre-populated. This helps save time by avoiding copying-pasting
+  2. Added additional script to support checking from NSBE site
 
 ### Partner Search
   1. If you're like me, keeping track of Cisco's partners is a time intensive task. While we have an Excel spreadsheet, the online partner search tool is the most current source of information. 
   2. Click the "Partner" button to open a new tab with the lead's current employer pre-loaded as a search term.
+  
   
 ## Installation
 ### Supported Browsers

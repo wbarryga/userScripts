@@ -1,0 +1,30 @@
+// ==UserScript==
+// @name         NSBE Dup Checker
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        http://careers.nsbe.org/r/resumes/view.cfm?c*
+// @grant        none
+// @require      https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js
+// @require      https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js
+// ==/UserScript==
+
+
+function avature() {
+    var name = document.querySelectorAll("#jt_cp_resume_view_container > h2")[0].textContent;
+    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"==\",\"value\":" + "\"" + name +"\"}],\"isAnd\":true}}";
+    window.open(url1);
+}
+
+setTimeout(function() {
+    $('head').append("<link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/start/jquery-ui.css' rel='stylesheet' type='text/css'>");
+    // Adds additional spaces that make seperating certain fields much easier
+
+    //remove the text "recruiter tools" to make room for the buttons
+    $('#recruiter-toolbox > div.module-header > h2').text("");
+    $("#jt_page-resume_view > div.jt_page_inner.clearfix > div:nth-child(8) > div > div").append("<button class='mybutt' id='2button'>Avature</button>");
+    //function to add buttons. Update to remove deactivated buttons
+    $('#2button').button();
+    $('#2button').on("click", avature);
+},4500);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cisco LinkedIn Tools
 // @namespace    http://tampermonkey.net/
-// @version      0.6.3.4
+// @version      0.7.0.0
 // @description  GUI buttons that add additional functionalities
 // @author       You
 // @match        https://www.linkedin.com/recruiter/profile/*
@@ -10,17 +10,23 @@
 // @grant        none
 // ==/UserScript==
 /* jshint -W097 */
-function partner() {
+/*function partner() {
     var companyName = document.querySelectorAll("#profile-experience > div.module-body > ul > li:nth-child(1) > div > h5 > a")[0].textContent;
     var url = "http://locatr.cloudapps.cisco.com/WWChannels/LOCATR/performBasicSearch.do?keyWord=" + companyName + "&country=US";
     window.open(url);
 }
-function avature() {
+*/
+
+function avature() { // function to check for URL and name
     var name = document.querySelectorAll(".profile-info > h1.searchable")[0].textContent;
     var nameArr = name.split(" ");
     var first = nameArr[0];
     var last = nameArr[1];
-    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"name\":\"fullName\",\"op\":\"==\",\"value\":" + "\"" + first + " " + last +"\"}],\"isAnd\":true}}";
+    var publicURL = $("li.public-profile.searchable a").attr("href");
+    // for redundancy split the url to find the portion after /in/
+    var publicKey = publicURL.split("/")[4];
+    var recruiterURL = window.location.pathname.split("/profile/")[1];
+    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"filters\":[{\"name\":\"keywords\",\"op\":\"matches\",\"value\":{\"extension\":{\"type\":\"everything\"},\"main\":\"" + recruiterURL + " OR " + publicKey + "\"}},{\"name\":\"fullName\",\"op\":\"==\",\"value\":\"" + first + " " +  last + "\"}],\"isAnd\":false}],\"isAnd\":true}}/Columns:[\"fullName\",\"jobTitle\",\"company\",\"contactTags\"]/SecondaryOrderDirection:ASC";
     window.open(url1);
 }
 
@@ -30,15 +36,17 @@ setTimeout(function() {
     //remove the text "recruiter tools" to make room for the buttons
     $('#recruiter-toolbox > div.module-header > h2').text("");
     //function to add buttons. Update to remove deactivated buttons
-    $('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='1button'>Partner</button>");
+    //$('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='1button'>Partner</button>");
     $('#recruiter-toolbox > div.module-header > h2').append("<button class='mybutt' id='2button'>Avature</button>");
     $('.mybutt').button();
     $('.mybutt').css({
+        'margin-left' : 'auto',
+        'margin-right' : 'auto',
         'font-size' : '12px',
-        'width': '80px',
+        'width': '240px',
         'height' : '20px'
     });
-    $('#1button').css("float", "left");
-    $('#1button').on("click", partner);
+    //$('#1button').css("float", "left");
+    //$('#1button').on("click", partner);
     $('#2button').on("click", avature);
 },4500);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cisco LinkedIn Tools
 // @namespace    http://tampermonkey.net/
-// @version      0.7.0.0
+// @version      0.7.1.0
 // @description  GUI buttons that add additional functionalities
 // @author       You
 // @match        https://www.linkedin.com/recruiter/profile/*
@@ -22,9 +22,18 @@ function avature() { // function to check for URL and name
     var nameArr = name.split(" ");
     var first = nameArr[0];
     var last = nameArr[1];
-    var publicURL = $("li.public-profile.searchable a").attr("href");
+    let publicURL = $("li.public-profile.searchable a").attr("href");
     // for redundancy split the url to find the portion after /in/
-    var publicKey = publicURL.split("/")[4];
+    // error handling
+    try {
+       var publicKey = publicURL.split("/")[4];
+    }
+    catch(err) {
+        console.log("No Public URL found");
+    }
+    finally {
+       var publicKey = "";
+    }
     var recruiterURL = window.location.pathname.split("/profile/")[1];
     var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"filters\":[{\"name\":\"keywords\",\"op\":\"matches\",\"value\":{\"extension\":{\"type\":\"everything\"},\"main\":\"" + recruiterURL + " OR " + publicKey + "\"}},{\"name\":\"fullName\",\"op\":\"==\",\"value\":\"" + first + " " +  last + "\"}],\"isAnd\":false}],\"isAnd\":true}}/Columns:[\"fullName\",\"jobTitle\",\"company\",\"contactTags\"]/SecondaryOrderDirection:ASC";
     window.open(url1);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cisco LinkedIn Tools
 // @namespace    http://tampermonkey.net/
-// @version      0.7.1.0
+// @version      0.7.2.0
 // @description  GUI buttons that add additional functionalities
 // @author       You
 // @match        https://www.linkedin.com/recruiter/profile/*
@@ -17,6 +17,14 @@
 }
 */
 
+function errorHandle(tryme) {
+    if (tryme !== null) {
+        return tryme.split("/")[4];
+    } else {
+        return "";
+    }
+}
+
 function avature() { // function to check for URL and name
     var name = document.querySelectorAll(".profile-info > h1.searchable")[0].textContent;
     var nameArr = name.split(" ");
@@ -25,17 +33,10 @@ function avature() { // function to check for URL and name
     let publicURL = $("li.public-profile.searchable a").attr("href");
     // for redundancy split the url to find the portion after /in/
     // error handling
-    try {
-       var publicKey = publicURL.split("/")[4];
-    }
-    catch(err) {
-        console.log("No Public URL found");
-    }
-    finally {
-       var publicKey = "";
-    }
+
+    var key = errorHandle(publicURL);
     var recruiterURL = window.location.pathname.split("/profile/")[1];
-    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"filters\":[{\"name\":\"keywords\",\"op\":\"matches\",\"value\":{\"extension\":{\"type\":\"everything\"},\"main\":\"" + recruiterURL + " OR " + publicKey + "\"}},{\"name\":\"fullName\",\"op\":\"==\",\"value\":\"" + first + " " +  last + "\"}],\"isAnd\":false}],\"isAnd\":true}}/Columns:[\"fullName\",\"jobTitle\",\"company\",\"contactTags\"]/SecondaryOrderDirection:ASC";
+    var url1 = "https://cisco.avature.net/#People/Id:1/Filters:{\"entityTypeId\":2,\"set\":{\"filters\":[{\"filters\":[{\"name\":\"keywords\",\"op\":\"matches\",\"value\":{\"extension\":{\"type\":\"everything\"},\"main\":\"" + recruiterURL + " OR " + key + "\"}},{\"name\":\"fullName\",\"op\":\"==\",\"value\":\"" + first + " " +  last + "\"}],\"isAnd\":false}],\"isAnd\":true}}/Columns:[\"fullName\",\"jobTitle\",\"company\",\"contactTags\"]/SecondaryOrderDirection:ASC";
     window.open(url1);
 }
 

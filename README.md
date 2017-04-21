@@ -1,4 +1,5 @@
-# Cisco Tools
+# Duplicate Checker - Recruiter
+
 
 ### Bookmarklet, Beta
 1. This greatly simplifies installation by allowing users to drag and drop a bookmarklet. Simple!
